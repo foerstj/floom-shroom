@@ -17,6 +17,9 @@ property string effect_params$		= ""   	doc = "Parameters to send to SiegeFx scr
 property string description$		= ""	doc = "Description of enchantment being applied";
 property string	templateName$		= ""	doc = "template name of creature we are transforming into";
 
+property float  walkModifier$		= 1.0	doc = "Used to slow or speed up the targets walking speed.";
+
+
 owner = GoSkritComponent;
 
 Goid 	caster$;
@@ -26,6 +29,8 @@ float	lifeRatio$;
 float	manaRatio$;
 float   originalLife$;
 float	originalMana$;
+
+float	previousVelocity$;
 
 #include "k_inc_spl_utils_DSX"
 
@@ -134,6 +139,10 @@ state Transform$
 			#only( game )
 	          	[[
 			TransformationManager.STransformMe(target$.Go, templateName$, owner.go.GetTemplateName());
+
+			// apply the speed effects
+			previousVelocity$ = target$.Go.Body.GetAvgMoveVelocity();
+			target$.Go.Body.SetAvgMoveVelocity(previousVelocity$*walkModifier$);
 			]]
 		}
 		else
@@ -188,6 +197,9 @@ state UnTransform$
           		[[
 			// untransform the caster
 			TransformationManager.SUnTransformMe(target$.Go);
+
+			// un apply the slow down effects
+			target$.Go.Body.SetAvgMoveVelocity(previousVelocity$);
 			]]
 
 			// clear the minds of the enemies engaged with the character

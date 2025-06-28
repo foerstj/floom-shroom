@@ -1,0 +1,50 @@
+[t:template,n:spell_transform_floom_shroom]
+{
+	doc = "spell Transform Into Floom Shroom";
+	specializes = base_spell_transform_good;
+	[aspect]
+	{
+		gold_value = 1;
+	}
+	[common]
+	{
+		description = "Caster transforms into a shroom.";
+		screen_name = "Transform Into Floom Shroom";
+	}
+	[gui]
+	{
+		active_icon = b_gui_ig_i_ic_sp_265;
+		inventory_icon = b_gui_ig_i_ic_sp_265_inv;
+	}
+	[magic]
+	{
+		one_use = true;
+		max_level = 99;
+		required_level = 0;
+		effect_duration = 3600 * (1 + #magic);
+
+		[enchantments]
+		{
+			[*]
+			{
+				alteration = alter_armor;
+				duration = #infinite;
+				value = ( 6 + ((#MAGIC -1) * 9.3534)) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #base_defense;
+			}
+			[*]
+			{
+				alteration = alter_life;
+				duration = 0.1;
+				value = #maxlife;
+			}
+		}
+	}
+
+	[spell_transformation]
+	{
+		Description = "Transformed";
+		effect_script = "transform_barkrunner";
+		templateName = "mushrooms_cav_06";	// template name of creature we are transforming into
+		effect_params = "[scale(19.0)]";
+	}
+}

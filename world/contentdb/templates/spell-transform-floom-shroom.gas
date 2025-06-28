@@ -40,21 +40,11 @@
 		}
 	}
 
-	[spell_transformation]
+	[spell_transformation_ambient]
 	{
 		Description = "Transformed";
 		effect_script = "transform_barkrunner";
 		templateName = "mushrooms_cav_06";	// template name of creature we are transforming into
 		effect_params = "[scale(19.0)]";
-	}
-	[spell_speed_affector]
-	{
-		canStackDuration = true;
-		description = "Haste";
-		effect_script = haste;
-		walkModifier = 0.0;
-		//attackModifier = 0.8; // ( 1 / 0.8 = 1.25 )
-		groupEffect = false;
-		effectPartyMembers = true;
 	}
 }

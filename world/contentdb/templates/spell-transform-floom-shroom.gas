@@ -37,6 +37,13 @@
 				duration = 0.1;
 				value = #maxlife;
 			}
+
+			[*]
+			{
+				alteration = alter_move_speed; // crash on hover, need own skrit...
+				duration = #infinite;
+				value = -4.5;
+			}
 		}
 	}
 

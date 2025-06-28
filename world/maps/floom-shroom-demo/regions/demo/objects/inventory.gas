@@ -1,0 +1,7 @@
+[t:spell_transform_floom_shroom,n:0x00100002]
+{
+	[placement]
+	{
+	  p position = 1.5609,4.76837e-007,0.188063,0x9ffd9fbb;
+	}
+}

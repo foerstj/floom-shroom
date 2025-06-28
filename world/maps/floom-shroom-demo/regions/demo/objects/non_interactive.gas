@@ -1,0 +1,14 @@
+[t:mushroom_glb_01,n:0x00100000]
+{
+	[placement]
+	{
+	  p position = -2.36225,0,-2.78343,0x9ffd9fbb;
+	}
+}
+[t:mushrooms_cav_06,n:0x00100001]
+{
+	[placement]
+	{
+	  p position = -1.32483,0,-2.68056,0x9ffd9fbb;
+	}
+}

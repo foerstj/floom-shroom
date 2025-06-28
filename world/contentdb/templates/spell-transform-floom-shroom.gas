@@ -37,13 +37,6 @@
 				duration = 0.1;
 				value = #maxlife;
 			}
-
-			[*]
-			{
-				alteration = alter_move_speed; // crash on hover, need own skrit...
-				duration = #infinite;
-				value = -4.5;
-			}
 		}
 	}
 
@@ -53,5 +46,15 @@
 		effect_script = "transform_barkrunner";
 		templateName = "mushrooms_cav_06";	// template name of creature we are transforming into
 		effect_params = "[scale(19.0)]";
+	}
+	[spell_speed_affector]
+	{
+		canStackDuration = true;
+		description = "Haste";
+		effect_script = haste;
+		walkModifier = 0.0;
+		//attackModifier = 0.8; // ( 1 / 0.8 = 1.25 )
+		groupEffect = false;
+		effectPartyMembers = true;
 	}
 }

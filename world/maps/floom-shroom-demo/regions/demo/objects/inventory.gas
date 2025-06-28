@@ -5,3 +5,14 @@
 	  p position = 1.5609,4.76837e-007,0.188063,0x9ffd9fbb;
 	}
 }
+[t:spell_haste,n:0x00100004]
+{
+	[magic]
+	{
+	  f required_level = 0;
+	}
+	[placement]
+	{
+	  p position = 1.86663,0,-1.07355,0x9ffd9fbb;
+	}
+}

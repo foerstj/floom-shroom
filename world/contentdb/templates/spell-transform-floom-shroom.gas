@@ -48,5 +48,6 @@
 		effect_params = "[scale(19.0)]";
 
 		walkModifier = 0.0;
+		blockingState = "haste";  // Prevent transformation when Haste is active - end of Haste would reset walk speed
 	}
 }

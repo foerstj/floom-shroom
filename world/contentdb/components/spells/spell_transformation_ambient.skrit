@@ -18,6 +18,7 @@ property string description$		= ""	doc = "Description of enchantment being appli
 property string	templateName$		= ""	doc = "template name of creature we are transforming into";
 
 property float  walkModifier$		= 1.0	doc = "Used to slow or speed up the targets walking speed.";
+property string blockingState$		= "haste"	doc = "state name of enchantment that blocks this spell";
 
 
 owner = GoSkritComponent;
@@ -58,6 +59,14 @@ startup state CastBegin$
 			if( target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 			{
 			//	report.genericf("transform: actor ALREADY transformed - going to finished state\n");
+				SetState Finish$;
+				return;
+			}
+			
+			// Prevent transformation when Haste is active - end of Haste would reset walk speed
+			if( target$.Go.Actor.HasGenericState( blockingState$ ) )
+			{
+				// somewhat unsatisfactory, the scroll is already burned at this point
 				SetState Finish$;
 				return;
 			}

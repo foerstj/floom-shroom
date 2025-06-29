@@ -37,11 +37,19 @@
 	}
 	[mind]
 	{
+		jat_approach = jat_none;
+		jat_follow = jat_none;
 		jat_face          		= jat_none;
+		jat_fidget = jat_none;
 		jat_move          		= jat_none;
 		jat_attack_object       = jat_none;
 		jat_die          		= jat_none;
 		movement_orders			= mo_hold;
+		sight_range = 0;
+		actor_may_attack = false;
+        actor_may_be_attacked = false;
+		on_enemy_spotted_attack = false;
+		on_enemy_entered_weapon_engage_range_attack = false;
 	}
 }
 

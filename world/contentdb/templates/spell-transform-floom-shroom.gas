@@ -44,7 +44,7 @@
 	{
 		Description = "Transformed";
 		effect_script = "transform_barkrunner";
-		templateName = "mushrooms_cav_06";	// template name of creature we are transforming into
+		templateName = "transformed_floom_shroom";	// template name of creature we are transforming into
 		effect_params = "[scale(19.0)]";
 
 		walkModifier = 0.0;

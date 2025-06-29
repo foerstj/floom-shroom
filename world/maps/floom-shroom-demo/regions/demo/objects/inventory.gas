@@ -1,10 +1,3 @@
-[t:spell_transform_floom_shroom,n:0x00100002]
-{
-	[placement]
-	{
-	  p position = 1.5609,4.76837e-007,0.188063,0x9ffd9fbb;
-	}
-}
 [t:spell_haste,n:0x00100004]
 {
 	[magic]
@@ -13,14 +6,14 @@
 	}
 	[placement]
 	{
-	  p position = 1.86663,0,-1.07355,0x9ffd9fbb;
+	  p position = -3.13876,0,1.97258,0x9ffd9fbb;
 	}
 }
 [t:potion_transform_floom_shroom_small,n:0x00100005]
 {
 	[placement]
 	{
-	  p position = 3.17241,9.53674e-007,-0.0931654,0x9ffd9fbb;
+	  p position = 1.63844,9.53674e-007,0.0932903,0x9ffd9fbb;
 	}
 }
 [t:potion_transform_floom_shroom_small,n:0x00100006]

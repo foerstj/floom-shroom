@@ -1,0 +1,72 @@
+[t:template,n:potion_transform_floom_shroom]
+{
+	specializes         = base_potion_good;
+	doc                 = "potion_rejuvenation_sm";
+	category_name       = "potions";
+
+	[aspect]
+	{
+		model = m_i_glb_mushrooms-01;
+		textures:0 = b_i_glb_mushrooms-01;
+	}
+   	aspect:gold_value   = 20;
+
+	[common]
+	{
+		screen_name  = "Small Rejuvenation Potion";
+		[template_triggers]
+		{
+			[*]
+			{
+				action* = call_sfx_script( "potion_sparkle_blue" );
+				condition* = receive_world_message("we_dropped");
+			}
+			[*]
+			{
+				action* = call_sfx_script( "potion_sparkle_red" );
+				condition* = receive_world_message("we_dropped");
+			}
+		}
+	}
+	[magic]
+	{
+        pcontent_level = 5;
+		[enchantments]
+		{
+			[*]
+			{
+				alteration          = alter_mana;
+				value               = 300.0;
+				//description         = "Raise Mana";
+				duration            = 0;
+				frequency           = 0;
+				is_active           = false;
+				is_enhancement      = true;
+				is_permanent        = true;
+				is_single_instance  = false;
+				is_transmissible    = false;
+				is_value_limited    = true;
+				effect_script_equip = rejuv_potion_small;
+
+			}
+			[*]
+			{
+				alteration          = alter_life;
+				value               = 300.0;
+				//description         = "Raise Health";
+				duration            = 0;
+				frequency           = 0;
+				is_active           = false;
+				is_enhancement      = true;
+				is_permanent        = true;
+				is_single_instance  = false;
+				is_transmissible    = false;
+				is_value_limited    = true;
+			}
+		}
+	}
+
+	gui:inventory_icon          = b_gui_ig_i_it_potion-bottle-rejuvenation-001;
+
+	potion:inventory_icon_2     = b_gui_ig_i_it_potion-fill-rejuvenation-001;
+}

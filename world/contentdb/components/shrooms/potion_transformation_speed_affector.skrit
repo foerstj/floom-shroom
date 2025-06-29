@@ -163,7 +163,10 @@ state Transform$
 		
 		originalLife$ = target$.Go.Aspect.GetCurrentLife();
 		originalMana$ = target$.Go.Aspect.GetCurrentMana();
-		
+
+		// free their mind and their arse will follow
+		target$.go.Mind.Clear(JQ_ACTION);
+
 		// make sure that nothing bad has happened to this character ( still alive ) since casting this spell
 		if( target$.go.aspect.GetLifeState() == LS_ALIVE_CONSCIOUS )
 		{
@@ -199,6 +202,14 @@ state Transform$
 		{
 			target$.go.actor.SSetAlignment( aa_neutral );
 		}
+		if (target$.go.HasMind())
+		{
+			// free their mind and their arse will follow
+			target$.go.Mind.Clear(JQ_ACTION);
+
+			target$.go.mind.SDoJob( MakeJobReq( JAT_BRAIN, JQ_BRAIN, QP_CLEAR, AO_REFLEX ));
+		}
+		MCPManager.MakeRequest( target$, PL_FACE );  // stop facing the enemy
 
 		SetState InActive$;
 		return;
@@ -261,7 +272,7 @@ state UnTransform$
 			// set mana to ratio of what mans is
 			target$.go.aspect.SSetCurrentLife( originalLife$ );//lifeRatio$ * target$.go.aspect.GetMaxLife() );
 			target$.go.aspect.SSetCurrentMana( manaRatio$ * target$.go.aspect.GetMaxMana() );
-			
+
 			target$.go.mind.SDoJob( MakeJobReq( JAT_BRAIN, JQ_BRAIN, QP_CLEAR, AO_REFLEX ));
 
 			SetState Finish$;

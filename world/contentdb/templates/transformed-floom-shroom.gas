@@ -1,6 +1,6 @@
 [t:template,n:base_transformed_floom_shroom]
 {
-	specializes = non_interactive_nonblocking;
+	specializes = actor_ambient;
 
 	category_name = "foliage";
 	doc = "shroom_red_med";
@@ -16,6 +16,16 @@
 		life = 100;
 		max_mana = 100;
 		mana = 100;
+	}
+	[actor] { race=other; }
+	body:avg_move_velocity = 0.000000;
+	[mind]
+	{
+		jat_face          		= jat_none;
+		jat_move          		= jat_none;
+		jat_attack_object       = jat_none;
+		jat_die          		= jat_none;
+		movement_orders			= mo_hold;
 	}
 }
 

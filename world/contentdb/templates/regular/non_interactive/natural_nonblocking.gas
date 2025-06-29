@@ -2780,22 +2780,10 @@
 		}
 	}
 }
-[t:template,n:mushroom_glb_01]
-{
-	category_name = "foliage";
-	doc = "shroom_red_sm";
-	specializes = non_interactive_nonblocking;
-	[aspect]
-	{
-		lodfi_lower = 0.8;
-		lodfi_upper = 1;
-		model = m_i_glb_mushrooms-01;
-		[textures]
-		{
-			0 = b_i_glb_mushrooms-01;
-		}
-	}
-}
+
+// EDITED
+[t:template,n:mushroom_glb_01] { specializes = potion_transform_floom_shroom_small_base; }
+
 [t:template,n:mushroom_glb_02]
 {
 	category_name = "foliage";
@@ -3008,22 +2996,10 @@
 		}
 	}
 }
-[t:template,n:mushrooms_cav_06]
-{
-	category_name = "foliage";
-	doc = "shroom_red_med";
-	specializes = non_interactive_nonblocking;
-	[aspect]
-	{
-		lodfi_lower = 0.25;
-		lodfi_upper = 0.6;
-		model = m_i_cav_mushrooms-06;
-		[textures]
-		{
-			0 = b_i_cav_mushrooms-01;
-		}
-	}
-}
+
+// EDITED
+[t:template,n:mushrooms_cav_06] { specializes = potion_transform_floom_shroom_large_base; }
+
 [t:template,n:mushrooms_cav_07]
 {
 	category_name = "foliage";

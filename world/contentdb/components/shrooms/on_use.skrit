@@ -99,26 +99,6 @@ startup state CastBegin$
 			caster$ = msg$.GetSendFrom();
 			target$ = caster$;
 
-			if( !target$.IsValid || !caster$.Isvalid )
-			{
-				SetState Finish$;
-				return;
-			}
-			
-			// a target can't be transformed twice
-			if( target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
-			{
-			//	report.genericf("transform: actor ALREADY transformed - going to finished state\n");
-				SetState Finish$;
-				return;
-			}
-			
-			duration$ = owner.Go.Magic.EvaluateEffectDuration(caster$.Go, target$.Go);
-
-		//	report.genericf("transform: adding generic state for duration: %d\n", duration$);
-			// Add the effected state so this can only happen once
-			target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$ + 2.0, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
-						
 			this.CreateTimer( 1, 2.0 );
 			return;
 		}
@@ -126,7 +106,36 @@ startup state CastBegin$
 
 	trigger OnTimer$(1)
 	{
+		/////////////////////////////
 		// Omni Go
+
+		if( !target$.IsValid || !caster$.Isvalid )
+		{
+			SetState Finish$;
+			return;
+		}
+		
+		// a target can't be transformed twice
+		if( target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
+		{
+		//	report.genericf("transform: actor ALREADY transformed - going to finished state\n");
+			SetState Finish$;
+			return;
+		}
+
+		// Prevent transformation when Haste is active - end of Haste would reset walk speed
+		if( target$.Go.Actor.HasGenericState( blockingState$ ) )
+		{
+			// somewhat unsatisfactory, the scroll is already burned at this point
+			SetState Finish$;
+			return;
+		}
+
+		duration$ = owner.Go.Magic.EvaluateEffectDuration(caster$.Go, target$.Go);
+
+		//	report.genericf("transform: adding generic state for duration: %d\n", duration$);
+		// Add the effected state so this can only happen once
+		target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
 
 		// Start the visual
 		SiegeFx.SRunScript( effect_script$, target$, caster$, effect_params$, owner.goid, WE_REQ_ACTIVATE );

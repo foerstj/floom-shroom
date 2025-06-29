@@ -20,20 +20,7 @@
 	[actor]
 	{
 		race=other;
-		[skills]
-		{
-			strength =		12, 0;
-		}
 	}
-	[attack]
-	{
-		attack_range = 0.5;
-		damage_max = 57;
-		damage_min = 45;
-		reload_delay = 0;
-	}
-	[defend] { defense=102; }
-	[inventory] {}
 	[body]
 	{
 		avg_move_velocity = 0.000000;
@@ -74,7 +61,6 @@
 	}
 	[mind]
 	{
-		jat_brain				= world\ai\jobs\common\brain_hero.skrit;
 		jat_face          		= jat_none;
 		jat_move          		= jat_none;
 		jat_attack_object       = jat_none;

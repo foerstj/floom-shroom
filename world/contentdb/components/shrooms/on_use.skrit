@@ -167,7 +167,6 @@ state Transform$
 		
 		// do the alterations
 		owner.go.magic.SApplyEnchantments( target$, caster$ );
-		target$.go.aspect.SSetCurrentLife( target$.go.aspect.GetMaxLife() );
 		
 		// set the target's values correctly
 		target$.go.CheckModifierRecalc();
@@ -175,10 +174,7 @@ state Transform$
 		// set the life to max and mana to mana ratio
 		target$.go.aspect.SSetCurrentLife( target$.go.aspect.GetMaxLife() );
 		target$.go.aspect.SSetCurrentMana( manaRatio$ * target$.go.aspect.GetMaxMana() );
-
-		// let them live in case they weren't already
-		target$.go.aspect.SSetLifeState(LS_ALIVE_CONSCIOUS);
-
+		
 		SetState InActive$;
 		return;
 	}

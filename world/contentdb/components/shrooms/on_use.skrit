@@ -67,7 +67,8 @@ startup state CastBegin$
 			// Prevent transformation when Haste is active - end of Haste would reset walk speed
 			if( target$.Go.Actor.HasGenericState( blockingState$ ) )
 			{
-				// somewhat unsatisfactory, the scroll is already burned at this point
+				// somewhat unsatisfactory, the item is already burned at this point
+				Report.SScreen( Report.Translate( "Not so hasty!" ) );
 				SetState Finish$;
 				return;
 			}
@@ -126,7 +127,8 @@ startup state CastBegin$
 		// Prevent transformation when Haste is active - end of Haste would reset walk speed
 		if( target$.Go.Actor.HasGenericState( blockingState$ ) )
 		{
-			// somewhat unsatisfactory, the scroll is already burned at this point
+			// somewhat unsatisfactory, the item is already burned at this point
+			Report.SScreen( Report.Translate( "Not so hasty!" ) );
 			SetState Finish$;
 			return;
 		}

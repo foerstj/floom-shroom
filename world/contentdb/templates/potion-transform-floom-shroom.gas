@@ -54,11 +54,10 @@
 			//}
 		}
 
-		// from base_spell_transform_good below this point
-
+		// from base_spell_transform_good
 		mana_cost = 0;
 		mana_cost_modifier = (#magic+1)*6-.7;
-		effect_duration = 10 + 30 * ((#MAGIC - #SPELL_REQ_LEVEL) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL));
+		effect_duration = 10;
 		apply_enchantments = false;
 		cast_range = 10;
 		cast_reload_delay = 0;
@@ -69,88 +68,20 @@
 		target_type_flags = tt_self;
 		require_state_check = false;
 
-		[enchantments] //THESE VALUES BASED ON A #MAGIC LEVEL FIGHTER CHARACTER
+		[enchantments]
 		{
-			[*]
-			{
-				alteration = alter_strength;
-				duration = #infinite;
-				value = (10 + #magic * 0.64) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #str;  //adjust value from 1.0 to 0.75
-			}
-			[*]
-			{
-				alteration = alter_dexterity;
-				duration = #infinite;
-				value = (10 + #magic * 0.25) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #dex;
-			}
-			[*]
-			{
-				alteration = alter_intelligence;
-				duration = #infinite;
-				value = (10 + #magic * 0.09 * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL)))) - #int;
-			}
-			[*]
-			{
-				alteration = alter_melee;
-				duration = #infinite;
-				value = (#magic) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #melee;
-			}
-
-			[*] //ZERO THESE
-			{
-				alteration = alter_ranged;
-				duration = #infinite;
-				value = #ranged * -1;
-			}
-			[*]
-			{
-				alteration = alter_combat_magic;
-				duration = #infinite;
-				value = #combat_magic * -1;
-			}
-			[*]
-			{
-				alteration = alter_nature_magic;
-				duration = #infinite;
-				value = #nature_magic * -1;
-			}
-
-			//DEFENSE & ATTACK
-
 			[*]
 			{
 				alteration = alter_armor;
 				duration = #infinite;
-				value = (( 6 + ((#MAGIC -1) * 9.3534)) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL)))) - #base_defense;
+				value = ( 6 + ((#MAGIC -1) * 9.3534)) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #base_defense;
 			}
-			[*]
-			{
-				alteration = alter_melee_damage_min;
-				duration = #infinite;
-				value = ( 0.9 * ( (4.1 * #MAGIC) + ((1 - ( #MAGIC / 114 )) * 6.3)) ) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #MELEE_DAMAGE_MIN;
-			}
-			[*]
-			{
-				alteration = alter_melee_damage_max;
-				duration = #infinite;
-				value = ( 1.1 * ( (4.1 * #MAGIC) + ((1 - ( #MAGIC / 114 )) * 6.3)) ) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #MELEE_DAMAGE_MAX;
-			}
-
-			//BRIEFLY SET TO MAX HEALTH, MANA, SO YOU START OFF HEALED
 			//[*]
 			//{
 			//	alteration = alter_life;
 			//	duration = 0.1;
 			//	value = #maxlife;
 			//}
-			/*
-			[*]
-			{
-				alteration = alter_mana;
-				duration = 0.1;
-				value = #maxmana;
-			}
-			*/
 		}
 	}
 

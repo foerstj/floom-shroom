@@ -21,7 +21,7 @@
 		one_use = true;
 		max_level = 99;
 		required_level = 0;
-		effect_duration = 30 * (1 + #magic);
+		effect_duration = 10;
 
 		[enchantments]
 		{
@@ -31,12 +31,12 @@
 				duration = #infinite;
 				value = ( 6 + ((#MAGIC -1) * 9.3534)) * (1.0 - 0.25 * (( #MAGIC - #SPELL_REQ_LEVEL ) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL))) - #base_defense;
 			}
-			[*]
-			{
-				alteration = alter_life;
-				duration = 0.1;
-				value = #maxlife;
-			}
+			//[*]
+			//{
+			//	alteration = alter_life;
+			//	duration = 0.1;
+			//	value = #maxlife;
+			//}
 		}
 	}
 

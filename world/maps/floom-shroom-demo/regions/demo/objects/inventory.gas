@@ -23,3 +23,36 @@
 	  p position = 3.17241,9.53674e-007,-0.0931654,0x9ffd9fbb;
 	}
 }
+[t:potion_transform_floom_shroom,n:0x00100006]
+{
+	[placement]
+	{
+	  p position = 2.95688,9.53674e-007,2.20022,0x9ffd9fbb;
+	}
+}
+[t:potion_transform_floom_shroom,n:0x00100007]
+{
+	[placement]
+	{
+	  p position = 2.41679,9.53674e-007,2.67348,0x9ffd9fbb;
+	}
+}
+[t:potion_transform_floom_shroom,n:0x00100008]
+{
+	[placement]
+	{
+	  p position = 3.14673,9.53674e-007,2.93033,0x9ffd9fbb;
+	}
+}
+[t:spell_magic_armor,n:0x0010000a]
+{
+	[magic]
+	{
+		mana_cost_modifier = (#magic+1)*30;
+	  f required_level = 0;
+	}
+	[placement]
+	{
+	  p position = -2.6501,0,2.95949,0x9ffd9fbb;
+	}
+}

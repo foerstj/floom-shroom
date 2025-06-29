@@ -15,6 +15,7 @@ set author=Johannes Förstner
 
 :: build main resource file
 rmdir /S /Q "%tmp%\Bits"
+robocopy "%bits%\art\bitmaps" "%tmp%\Bits\art\bitmaps" /xf *.psd /S
 robocopy "%bits%\world\contentdb" "%tmp%\Bits\world\contentdb" /E
 "%tc%\RTC.exe" -source "%tmp%\Bits" -out "%ds%\DSLOA\%mod_cs%.dsres" -copyright "%copyright%" -title "%mod_cs%" -author "%author%"
 if %errorlevel% neq 0 pause

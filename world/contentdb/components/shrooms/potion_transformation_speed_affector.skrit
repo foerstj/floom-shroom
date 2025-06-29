@@ -19,6 +19,7 @@ property string	templateName$		= ""	doc = "template name of creature we are tran
 
 property float  walkModifier$		= 1.0	doc = "Used to slow or speed up the targets walking speed.";
 property string blockingState$		= "haste"	doc = "state name of enchantment that blocks this spell";
+property bool infinite$ = false doc = "infinite duration";
 
 
 owner = GoSkritComponent;
@@ -133,7 +134,7 @@ startup state CastBegin$
 			return;
 		}
 
-		duration$ = owner.Go.Magic.EvaluateEffectDuration(caster$.Go, target$.Go);
+		duration$ = infinite$ ? -1.0 : owner.Go.Magic.EvaluateEffectDuration(caster$.Go, target$.Go);
 
 		//	report.genericf("transform: adding generic state for duration: %d\n", duration$);
 		// Add the effected state so this can only happen once
@@ -293,9 +294,11 @@ state InActive$
 	}
 
 	event OnEnterState$
-	{		
-		this.CreateTimer( 1, duration$ );
-		
+	{
+		if (!infinite$)
+		{
+			this.CreateTimer( 1, duration$ );
+		}
 	}
 	transition -> UnTransform$: OnGoHandleCCMessage( WE_KILLED );
 	transition -> UnTransform$: OnGoHandleCCMessage( WE_LOST_CONSCIOUSNESS );

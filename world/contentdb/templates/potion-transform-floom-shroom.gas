@@ -55,7 +55,7 @@
 		// from base_spell_transform_good
 		mana_cost = 0;
 		//mana_cost_modifier = (#magic+1)*6-.7;
-		//effect_duration = 10;  // 2304 real seconds = 1 ingame day
+		effect_duration = 2304;  // 2304 real seconds = 1 ingame day
 		apply_enchantments = false;
 		cast_range = 10;
 		cast_reload_delay = 0;
@@ -94,11 +94,7 @@
 	[common]
 	{
 		screen_name = "Red Spotted Floom Shroom";
-		description = "Eat me and turn into a mushroom!";
-	}
-	[magic]
-	{
-		effect_duration = 10;  // 2304 real seconds = 1 ingame day
+		description = "Eat me and turn into a mushroom for a day!";
 	}
 	[gui]
 	{
@@ -125,11 +121,7 @@
 	[common]
 	{
 		screen_name = "Giant Red Spotted Floom Shroom";
-		description = "Eat me and turn into a mushroom!";
-	}
-	[magic]
-	{
-		effect_duration = 30;  // 2304 real seconds = 1 ingame day
+		description = "Eat me and turn into a mushroom forever!";
 	}
 	[gui]
 	{
@@ -140,5 +132,6 @@
 	[potion_transformation_speed_affector]
 	{
 		templateName = "transformed_floom_shroom_large";	// template name of creature we are transforming into
+		infinite = true;
 	}
 }

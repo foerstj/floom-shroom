@@ -4,6 +4,7 @@
 
 	category_name = "foliage";
 	doc = "shroom_red_med";
+	common:is_multi_player = true;
 	[aspect]
 	{
 		is_selectable = true;

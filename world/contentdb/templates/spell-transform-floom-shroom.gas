@@ -10,6 +10,7 @@
 	{
 		description = "Caster transforms into a shroom.";
 		screen_name = "Transform Into Floom Shroom";
+		is_pcontent_allowed = false;
 	}
 	[gui]
 	{

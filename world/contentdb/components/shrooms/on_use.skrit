@@ -1,0 +1,12 @@
+owner = GoSkritComponent;
+
+startup state Startup$
+{
+	event OnGoHandleMessage$( eWorldEvent e$, WorldMessage /*msg$*/ )
+	{
+		if( e$ == WE_REQ_USE )
+		{
+			report.generic("Used!\n");
+		}
+	}
+}

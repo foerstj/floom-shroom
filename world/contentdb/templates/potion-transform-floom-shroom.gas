@@ -28,7 +28,7 @@
 
 		mana_cost = 0;
 		mana_cost_modifier = (#magic+1)*6-.7;
-		effect_duration = 30 + 30 * ((#MAGIC - #SPELL_REQ_LEVEL) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL));
+		effect_duration = 10 + 30 * ((#MAGIC - #SPELL_REQ_LEVEL) / (#SPELL_MAX_LEVEL - #SPELL_REQ_LEVEL));
 		apply_enchantments = false;
 		cast_range = 10;
 		cast_reload_delay = 0;
@@ -107,12 +107,12 @@
 			}
 
 			//BRIEFLY SET TO MAX HEALTH, MANA, SO YOU START OFF HEALED
-			//[*]
-			//{
-			//	alteration = alter_life;
-			//	duration = 0.1;
-			//	value = #maxlife;
-			//}
+			[*]
+			{
+				alteration = alter_life;
+				duration = 0.1;
+				value = #maxlife;
+			}
 			/*
 			[*]
 			{

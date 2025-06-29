@@ -18,7 +18,20 @@
 		mana = 100;
 	}
 	[actor] { race=other; }
-	body:avg_move_velocity = 0.000000;
+	[body]
+	{
+		avg_move_velocity = 0.000000;
+		[chore_dictionary]
+		{
+			chore_prefix = a_c_na_dg2_fs;
+			[chore_default]
+			{
+				chore_stances = 0;
+				skrit = infinite_loop;
+				[anim_files] { 00=ds; }
+			}
+		}
+	}
 	[mind]
 	{
 		jat_face          		= jat_none;

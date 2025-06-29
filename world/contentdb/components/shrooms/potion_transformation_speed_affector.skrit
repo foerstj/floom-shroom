@@ -200,6 +200,8 @@ state Transform$
 			target$.go.actor.SSetAlignment( aa_neutral );
 		}
 
+		MCPManager.MakeRequest( target$, PL_FACE );  // stop facing the enemy
+
 		SetState InActive$;
 		return;
 	}

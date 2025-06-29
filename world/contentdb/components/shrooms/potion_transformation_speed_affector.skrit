@@ -194,7 +194,12 @@ state Transform$
 		// set the life to max and mana to mana ratio
 		target$.go.aspect.SSetCurrentLife( target$.go.aspect.GetMaxLife() );
 		target$.go.aspect.SSetCurrentMana( manaRatio$ * target$.go.aspect.GetMaxMana() );
-		
+
+		if (target$.go.hasActor())
+		{
+			target$.go.actor.SSetAlignment( aa_neutral );
+		}
+
 		SetState InActive$;
 		return;
 	}
@@ -208,7 +213,12 @@ state UnTransform$
 		{
 			// no need to watch target any longer
 			GoDb.StopWatching( owner.Goid, target$);
-			
+
+			if (target$.go.hasActor())
+			{
+				target$.go.actor.SSetAlignment( aa_good );
+			}
+
 			#only( game )
 	          	[[
 			// remove the spell enchantments from the target

@@ -22,6 +22,36 @@
         pcontent_level = 5;
 		[enchantments]
 		{
+			//[*]
+			//{
+			//	alteration          = alter_mana;
+			//	value               = 300.0;
+			//	//description         = "Raise Mana";
+			//	duration            = 0;
+			//	frequency           = 0;
+			//	is_active           = false;
+			//	is_enhancement      = true;
+			//	is_permanent        = true;
+			//	is_single_instance  = false;
+			//	is_transmissible    = false;
+			//	is_value_limited    = true;
+			//	effect_script_equip = rejuv_potion_small;
+			//
+			//}
+			//[*]
+			//{
+			//	alteration          = alter_life;
+			//	value               = 300.0;
+			//	//description         = "Raise Health";
+			//	duration            = 0;
+			//	frequency           = 0;
+			//	is_active           = false;
+			//	is_enhancement      = true;
+			//	is_permanent        = true;
+			//	is_single_instance  = false;
+			//	is_transmissible    = false;
+			//	is_value_limited    = true;
+			//}
 		}
 
 		// from base_spell_transform_good below this point
@@ -107,12 +137,12 @@
 			}
 
 			//BRIEFLY SET TO MAX HEALTH, MANA, SO YOU START OFF HEALED
-			[*]
-			{
-				alteration = alter_life;
-				duration = 0.1;
-				value = #maxlife;
-			}
+			//[*]
+			//{
+			//	alteration = alter_life;
+			//	duration = 0.1;
+			//	value = #maxlife;
+			//}
 			/*
 			[*]
 			{

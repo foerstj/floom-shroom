@@ -47,7 +47,8 @@ startup state CastBegin$
 			// Normal Go
 
 			caster$ = msg$.GetSendFrom();
-			target$ = MakeGoid( msg$.GetData1() );
+			//target$ = MakeGoid( msg$.GetData1() );
+			target$ = caster$;
 
 			//if( !owner.Go.Magic.IsCastableOn( target$.go, true) )
 			//{
@@ -80,7 +81,7 @@ startup state CastBegin$
 				Goid new_spell$ = GoDb.SCloneGo( cloneReq$ );
 
 				// send Omni version an Activate to get it started.
-				PostWorldMessage( WE_REQ_ACTIVATE, caster$, new_spell$, msg$.GetData1(), 0 );
+				PostWorldMessage( WE_REQ_ACTIVATE, caster$, new_spell$, 0, 0 );
 			}
 
 			// Delete Normal version of the spell.
@@ -94,8 +95,9 @@ startup state CastBegin$
 			/////////////////////////////
 			// Omni Go
 
-			target$ = MakeGoid( msg$.GetData1() );
+			//target$ = MakeGoid( msg$.GetData1() );
 			caster$ = msg$.GetSendFrom();
+			target$ = caster$;
 
 			if( !target$.IsValid || !caster$.Isvalid )
 			{

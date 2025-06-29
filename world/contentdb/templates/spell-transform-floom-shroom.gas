@@ -40,7 +40,7 @@
 		}
 	}
 
-	[spell_transformation_ambient]
+	[spell_transformation_speed_affector]
 	{
 		Description = "Transformed";
 		effect_script = "transform_barkrunner";

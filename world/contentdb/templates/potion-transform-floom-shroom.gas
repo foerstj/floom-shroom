@@ -1,4 +1,4 @@
-[t:template,n:potion_transform_floom_shroom]
+[t:template,n:base_potion_transform_floom_shroom]
 {
 	specializes         = base_potion_good;
 	doc                 = "potion_transform_floom_shroom";
@@ -6,16 +6,14 @@
 
 	[aspect]
 	{
-		model = m_i_cav_mushrooms-06;
-		textures:0 = b_i_cav_mushrooms-01;
+		voice:put_down:* 			= s_e_gui_pick_up;
+		gold_value   = 1;
 	}
-	aspect:voice:put_down:* 			= s_e_gui_pick_up;
-   	aspect:gold_value   = 1;
 
 	[common]
 	{
-		screen_name = "Red Spotted Floom Shroom";
-		description = "Eat me and turn into a mushroom!";
+		//screen_name = "Red Spotted Floom Shroom";
+		//description = "Eat me and turn into a mushroom!";
 		is_pcontent_allowed = false;
 	}
 	[magic]
@@ -57,7 +55,7 @@
 		// from base_spell_transform_good
 		mana_cost = 0;
 		//mana_cost_modifier = (#magic+1)*6-.7;
-		effect_duration = 10;  // 2304 real seconds = 1 ingame day
+		//effect_duration = 10;  // 2304 real seconds = 1 ingame day
 		apply_enchantments = false;
 		cast_range = 10;
 		cast_reload_delay = 0;
@@ -69,20 +67,78 @@
 		require_state_check = false;
 	}
 
-	gui:inventory_icon          = b_gui_ig_i_it_mushroom-red-spotted-large;
-	gui:inventory_height = 2;
-	gui:inventory_width = 1;
-
 	//potion:inventory_icon_2     = b_gui_ig_i_it_potion-fill-rejuvenation-001;
 
 	[potion_transformation_speed_affector]
 	{
 		Description = "Transformed";
 		effect_script = "transform_barkrunner";
-		templateName = "transformed_floom_shroom";	// template name of creature we are transforming into
+		//templateName = "transformed_floom_shroom";	// template name of creature we are transforming into
 		effect_params = "[scale(19.0)]";
 
 		walkModifier = 0.0;
 		blockingState = "haste";  // Prevent transformation when Haste is active - end of Haste would reset walk speed
+	}
+}
+
+[t:template,n:potion_transform_floom_shroom_small] { specializes = potion_transform_floom_shroom_small_base; }
+[t:template,n:potion_transform_floom_shroom_small_base]
+{
+	specializes = base_potion_transform_floom_shroom;
+
+	[aspect]
+	{
+		model = m_i_glb_mushrooms-01;
+		textures:0 = b_i_glb_mushrooms-01;
+	}
+	[common]
+	{
+		screen_name = "Red Spotted Floom Shroom";
+		description = "Eat me and turn into a mushroom!";
+	}
+	[magic]
+	{
+		effect_duration = 10;  // 2304 real seconds = 1 ingame day
+	}
+	[gui]
+	{
+		inventory_icon          = b_gui_ig_i_it_mushroom-red-spotted-small;
+		inventory_height = 2;
+		inventory_width = 1;
+	}
+	[potion_transformation_speed_affector]
+	{
+		templateName = "transformed_floom_shroom_small";	// template name of creature we are transforming into
+	}
+}
+
+[t:template,n:potion_transform_floom_shroom_large] { specializes = potion_transform_floom_shroom_large_base; }
+[t:template,n:potion_transform_floom_shroom_large_base]
+{
+	specializes = base_potion_transform_floom_shroom;
+
+	[aspect]
+	{
+		model = m_i_cav_mushrooms-06;
+		textures:0 = b_i_cav_mushrooms-01;
+	}
+	[common]
+	{
+		screen_name = "Giant Red Spotted Floom Shroom";
+		description = "Eat me and turn into a mushroom!";
+	}
+	[magic]
+	{
+		effect_duration = 30;  // 2304 real seconds = 1 ingame day
+	}
+	[gui]
+	{
+		inventory_icon          = b_gui_ig_i_it_mushroom-red-spotted-large;
+		inventory_height = 2;
+		inventory_width = 1;
+	}
+	[potion_transformation_speed_affector]
+	{
+		templateName = "transformed_floom_shroom_large";	// template name of creature we are transforming into
 	}
 }

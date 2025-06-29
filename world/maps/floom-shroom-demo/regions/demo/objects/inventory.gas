@@ -16,28 +16,28 @@
 	  p position = 1.86663,0,-1.07355,0x9ffd9fbb;
 	}
 }
-[t:potion_transform_floom_shroom,n:0x00100005]
+[t:potion_transform_floom_shroom_small,n:0x00100005]
 {
 	[placement]
 	{
 	  p position = 3.17241,9.53674e-007,-0.0931654,0x9ffd9fbb;
 	}
 }
-[t:potion_transform_floom_shroom,n:0x00100006]
+[t:potion_transform_floom_shroom_small,n:0x00100006]
 {
 	[placement]
 	{
 	  p position = 2.95688,9.53674e-007,2.20022,0x9ffd9fbb;
 	}
 }
-[t:potion_transform_floom_shroom,n:0x00100007]
+[t:potion_transform_floom_shroom_large,n:0x00100007]
 {
 	[placement]
 	{
 	  p position = 2.41679,9.53674e-007,2.67348,0x9ffd9fbb;
 	}
 }
-[t:potion_transform_floom_shroom,n:0x00100008]
+[t:potion_transform_floom_shroom_large,n:0x00100008]
 {
 	[placement]
 	{

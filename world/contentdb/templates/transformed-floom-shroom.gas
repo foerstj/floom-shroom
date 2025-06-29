@@ -1,4 +1,4 @@
-[t:template,n:transformed_floom_shroom]
+[t:template,n:base_transformed_floom_shroom]
 {
 	specializes = non_interactive_nonblocking;
 
@@ -16,7 +16,30 @@
 		life = 100;
 		max_mana = 100;
 		mana = 100;
+	}
+}
 
+[t:template,n:transformed_floom_shroom_small]
+{
+	specializes = base_transformed_floom_shroom;
+
+	[aspect]
+	{
+		model = m_i_glb_mushrooms-01;
+		scale_base = 2.0;
+		[textures]
+		{
+			0 = b_i_glb_mushrooms-01;
+		}
+	}
+}
+
+[t:template,n:transformed_floom_shroom_large]
+{
+	specializes = base_transformed_floom_shroom;
+
+	[aspect]
+	{
 		model = m_i_cav_mushrooms-06;
 		scale_base = 1.5;
 		[textures]

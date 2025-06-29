@@ -24,15 +24,6 @@
 	[body]
 	{
 		avg_move_velocity = 0.000000;
-		[bone_translator]
-		{
-			body_anterior = bone05;
-			body_mid = bone01;
-			body_posterior = bone09;
-			kill_bone = bone01;
-			shield_bone = bone01;
-			weapon_bone = bone05;
-		}
 		[chore_dictionary]
 		{
 			chore_prefix = a_c_na_dg2_fs;
@@ -41,21 +32,6 @@
 				chore_stances = 0;
 				skrit = infinite_loop;
 				[anim_files] { 00=ds; }
-			}
-			[chore_fidget]
-			{
-				chore_stances = 0;
-				skrit = select_fidget;
-				[anim_files] { 00=dsf; }
-			}
-			[chore_misc]
-			{
-				chore_stances = ignore;
-				skrit = select_transition;
-				[anim_files]
-				{
-					look = a_c_na_dg2_fs0_dsf-02;
-				}
 			}
 		}
 	}

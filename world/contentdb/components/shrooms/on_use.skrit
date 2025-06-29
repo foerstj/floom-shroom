@@ -117,14 +117,22 @@ startup state CastBegin$
 
 		//	report.genericf("transform: adding generic state for duration: %d\n", duration$);
 			// Add the effected state so this can only happen once
-			target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
+			target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$ + 2.0, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
 						
-			// Start the visual
-			SiegeFx.SRunScript( effect_script$, target$, caster$, effect_params$, owner.goid, e$ );
-
-			SetState Transform$;
+			this.CreateTimer( 1, 2.0 );
 			return;
 		}
+	}
+
+	trigger OnTimer$(1)
+	{
+		// Omni Go
+
+		// Start the visual
+		SiegeFx.SRunScript( effect_script$, target$, caster$, effect_params$, owner.goid, WE_REQ_ACTIVATE );
+
+		SetState( Transform$ );
+		return;
 	}
 }
 

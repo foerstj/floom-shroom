@@ -17,13 +17,13 @@ set author=Johannes Förstner
 rmdir /S /Q "%tmp%\Bits"
 robocopy "%bits%\art\bitmaps" "%tmp%\Bits\art\bitmaps" /xf *.psd /S
 robocopy "%bits%\world\contentdb" "%tmp%\Bits\world\contentdb" /E
-"%tc%\RTC.exe" -source "%tmp%\Bits" -out "%ds%\DSLOA\%mod_cs%.dsres" -copyright "%copyright%" -title "%mod_cs%" -author "%author%"
+"%tc%\RTC.exe" -source "%tmp%\Bits" -out "%ds%\Resources\%mod_cs%.dsres" -copyright "%copyright%" -title "%mod_cs%" -author "%author%"
 if %errorlevel% neq 0 pause
 
 :: build demo map file
 rmdir /S /Q "%tmp%\Bits"
 robocopy "%bits%\world\maps\%map%" "%tmp%\Bits\world\maps\%map%" /E
-"%tc%\RTC.exe" -source "%tmp%\Bits" -out "%ds%\DSLOA\%mod_cs%.dsmap" -copyright "%copyright%" -title "%mod_cs%" -author "%author%"
+"%tc%\RTC.exe" -source "%tmp%\Bits" -out "%ds%\Maps\%mod_cs%.dsmap" -copyright "%copyright%" -title "%mod_cs%" -author "%author%"
 if %errorlevel% neq 0 pause
 
 :: Cleanup

@@ -6,9 +6,19 @@
 	doc = "shroom_red_med";
 	[aspect]
 	{
-		lodfi_lower = 0.25;
-		lodfi_upper = 0.6;
+		is_selectable = true;
+		draw_shadow = true;
+		rollover_highlight = true;
+		is_invincible = true;
+		is_collidable = true;
+
+		max_life = 100;
+		life = 100;
+		max_mana = 100;
+		mana = 100;
+
 		model = m_i_cav_mushrooms-06;
+		scale_base = 1.5;
 		[textures]
 		{
 			0 = b_i_cav_mushrooms-01;

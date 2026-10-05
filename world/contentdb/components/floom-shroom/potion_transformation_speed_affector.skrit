@@ -13,23 +13,23 @@
 
 
 property string effect_script$		= ""	doc = "Name of the SiegeFx script that will be providing the visual.";
-property string effect_params$		= ""   	doc = "Parameters to send to SiegeFx script";
+property string effect_params$		= ""	doc = "Parameters to send to SiegeFx script";
 property string description$		= ""	doc = "Description of enchantment being applied";
-property string	templateName$		= ""	doc = "template name of creature we are transforming into";
+property string templateName$		= ""	doc = "template name of creature we are transforming into";
 
-property float  walkModifier$		= 1.0	doc = "Used to slow or speed up the targets walking speed.";
+property float  walkModifier$		= 1.0		doc = "Used to slow or speed up the targets walking speed.";
 property string blockingState$		= "haste"	doc = "state name of enchantment that blocks this spell";
-property bool infinite$ = false doc = "infinite duration";
+property bool   infinite$			= false		doc = "infinite duration";
 
 
 owner = GoSkritComponent;
 
-Goid 	caster$;
+Goid	caster$;
 float	duration$;
 Goid	target$;
 float	lifeRatio$;
 float	manaRatio$;
-float   originalLife$;
+float	originalLife$;
 float	originalMana$;
 
 float	previousVelocity$;
@@ -38,14 +38,14 @@ float	previousVelocity$;
 
 startup state CastBegin$
 {
- 	event OnGoHandleMessage$( eWorldEvent e$, WorldMessage msg$ )
+	event OnGoHandleMessage$( eWorldEvent e$, WorldMessage msg$ )
 	{
 		if( e$ == WE_REQ_USE )
-		{	
-			
-		//	report.genericf("transform: spell cast\n");
+		{
 			/////////////////////////////
 			// Normal Go
+
+			// report.genericf("transform: spell cast\n");
 
 			caster$ = msg$.GetSendFrom();
 			//target$ = MakeGoid( msg$.GetData1() );
@@ -60,11 +60,11 @@ startup state CastBegin$
 			// a target can't be transformed twice
 			if( target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 			{
-			//	report.genericf("transform: actor ALREADY transformed - going to finished state\n");
+				// report.genericf("transform: actor ALREADY transformed - going to finished state\n");
 				SetState Finish$;
 				return;
 			}
-			
+
 			// Prevent transformation when Haste is active - end of Haste would reset walk speed
 			if( target$.Go.Actor.HasGenericState( blockingState$ ) )
 			{
@@ -73,7 +73,7 @@ startup state CastBegin$
 				SetState Finish$;
 				return;
 			}
-			
+
 			// transform can only be cast on yourself 
 			if( caster$ == target$ )
 			{
@@ -89,11 +89,10 @@ startup state CastBegin$
 			// Delete Normal version of the spell.
 			SetState Finish$;
 			return;
-			
+
 		}
 		else if ( e$ == WE_REQ_ACTIVATE )
 		{
-			
 			/////////////////////////////
 			// Omni Go
 
@@ -116,11 +115,11 @@ startup state CastBegin$
 			SetState Finish$;
 			return;
 		}
-		
+
 		// a target can't be transformed twice
 		if( target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 		{
-		//	report.genericf("transform: actor ALREADY transformed - going to finished state\n");
+			// report.genericf("transform: actor ALREADY transformed - going to finished state\n");
 			SetState Finish$;
 			return;
 		}
@@ -136,7 +135,7 @@ startup state CastBegin$
 
 		duration$ = infinite$ ? -1.0 : owner.Go.Magic.EvaluateEffectDuration(caster$.Go, target$.Go);
 
-		//	report.genericf("transform: adding generic state for duration: %d\n", duration$);
+		// report.genericf("transform: adding generic state for duration: %d\n", duration$);
 		// Add the effected state so this can only happen once
 		target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
 
@@ -152,23 +151,23 @@ state Transform$
 {
 	event OnEnterState$
 	{
-	//	report.genericf("transform: actual transforming occurring now\n");
-	
+		// report.genericf("transform: actual transforming occurring now\n");
+
 		// keep track of what our target is doing
 		GoDb.StartWatching( owner.Goid, target$);
 
 		// grab life and mana ratios so as to sync up caster with what it is transforming into
 		lifeRatio$ = target$.Go.Aspect.GetLifeRatio();
 		manaRatio$ = target$.Go.Aspect.GetManaRatio();
-		
+
 		originalLife$ = target$.Go.Aspect.GetCurrentLife();
 		originalMana$ = target$.Go.Aspect.GetCurrentMana();
-		
+
 		// make sure that nothing bad has happened to this character ( still alive ) since casting this spell
 		if( target$.go.aspect.GetLifeState() == LS_ALIVE_CONSCIOUS )
 		{
 			#only( game )
-	          	[[
+			[[
 			TransformationManager.STransformMe(target$.Go, templateName$, owner.go.GetTemplateName());
 
 			// apply the speed effects
@@ -181,16 +180,16 @@ state Transform$
 			SetState Finish$;
 			return;
 		}
-	
+
 		// clear the minds of the enemies engaged with the character
 		ClearEngaged$(target$);
-		
+
 		// do the alterations
 		owner.go.magic.SApplyEnchantments( target$, caster$ );
-		
+
 		// set the target's values correctly
 		target$.go.CheckModifierRecalc();
-		
+
 		// set the life to max and mana to mana ratio
 		target$.go.aspect.SSetCurrentLife( target$.go.aspect.GetMaxLife() );
 		target$.go.aspect.SSetCurrentMana( manaRatio$ * target$.go.aspect.GetMaxMana() );
@@ -222,11 +221,11 @@ state UnTransform$
 			}
 
 			#only( game )
-	          	[[
+			[[
 			// remove the spell enchantments from the target
 			GoDb.SRemoveEnchantments(target$, owner.goid, true);
 			]]
-			
+
 			// reset the target's values now that enchantments from transformations are gone
 			target$.go.CheckModifierRecalc();
 
@@ -237,7 +236,7 @@ state UnTransform$
 			SiegeFx.SRunScript( effect_script$, target$, caster$, effect_params$, owner.Goid, e$ );
 
 			#only( game )
-          		[[
+			[[
 			// untransform the caster
 			TransformationManager.SUnTransformMe(target$.Go);
 
@@ -263,7 +262,7 @@ state UnTransform$
 			// set mana to ratio of what mans is
 			target$.go.aspect.SSetCurrentLife( originalLife$ );//lifeRatio$ * target$.go.aspect.GetMaxLife() );
 			target$.go.aspect.SSetCurrentMana( manaRatio$ * target$.go.aspect.GetMaxMana() );
-			
+
 			target$.go.mind.SDoJob( MakeJobReq( JAT_BRAIN, JQ_BRAIN, QP_CLEAR, AO_REFLEX ));
 
 			SetState Finish$;
@@ -273,10 +272,9 @@ state UnTransform$
 
 	event OnEnterState$
 	{
-
 		if( target$.IsValid && target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 		{
-		//	report.genericf("transform: actual UNtransforming occurring now\n");
+			// report.genericf("transform: actual UNtransforming occurring now\n");
 			// untransformed caster has the same life/mana ratio as when transformed
 			lifeRatio$ = target$.Go.Aspect.GetLifeRatio();
 			manaRatio$ = target$.Go.Aspect.GetManaRatio();
@@ -287,7 +285,7 @@ state UnTransform$
 		}
 		else
 		{
-		//	report.genericf("transform: untransform, but the target is not transformed!!!\n");
+			// report.genericf("transform: untransform, but the target is not transformed!!!\n");
 			SetState Finish$;
 			return;
 		}
@@ -298,9 +296,9 @@ state InActive$
 {
 	/////////////////////////////
 	// Omni Go
-	
+
 	trigger OnTimer$(1)
-	{	
+	{
 		SetState( UnTransform$ );
 		return;
 	}
@@ -321,10 +319,10 @@ state Finish$
 {
 	event OnEnterState$
 	{
-	//	report.genericf("transform: we are finished\n");
-		
+		// report.genericf("transform: we are finished\n");
+
 		SiegeFx.ClearVariables( owner.goid );
-		
+
 		PostWorldMessage( WE_REQ_DELETE, owner.Goid, owner.Goid, 5 );
 	}
 }

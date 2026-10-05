@@ -274,7 +274,7 @@ state UnTransform$
 	event OnEnterState$
 	{
 
-		if( target$.IsValid && target$.Go.Actor.HasGenericState("Transformed") )
+		if( target$.IsValid && target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 		{
 		//	report.genericf("transform: actual UNtransforming occurring now\n");
 			// untransformed caster has the same life/mana ratio as when transformed

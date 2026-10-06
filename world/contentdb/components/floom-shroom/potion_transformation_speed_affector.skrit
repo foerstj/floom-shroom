@@ -137,7 +137,7 @@ startup state CastBegin$
 
 		// report.genericf("transform: adding generic state for duration: %d\n", duration$);
 		// Add the effected state so this can only happen once
-		target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, duration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
+		target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, -1, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
 
 		// Start the visual
 		SiegeFx.SRunScript( effect_script$, target$, caster$, effect_params$, owner.goid, WE_REQ_ACTIVATE );
@@ -212,6 +212,7 @@ state UnTransform$
 	{
 		if( e$ == WE_REQ_DEACTIVATE )
 		{
+			Report.SScreen( Report.Translate( "UnTransform$ WE_REQ_DEACTIVATE" ) );
 			// no need to watch target any longer
 			GoDb.StopWatching( owner.Goid, target$);
 
@@ -239,6 +240,7 @@ state UnTransform$
 			[[
 			// untransform the caster
 			TransformationManager.SUnTransformMe(target$.Go);
+			Report.SScreen( Report.Translate( "UnTransform$ WE_REQ_DEACTIVATE: We untransformed, right?" ) );
 
 			// un apply the slow down effects
 			target$.Go.Body.SetAvgMoveVelocity(previousVelocity$);
@@ -272,8 +274,10 @@ state UnTransform$
 
 	event OnEnterState$
 	{
+		Report.SScreen( Report.Translate( "UnTransform$ OnEnterState$" ) );
 		if( target$.IsValid && target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 		{
+			Report.SScreen( Report.Translate( "UnTransform$ OnEnterState$: Trigger untransforming" ) );
 			// report.genericf("transform: actual UNtransforming occurring now\n");
 			// untransformed caster has the same life/mana ratio as when transformed
 			lifeRatio$ = target$.Go.Aspect.GetLifeRatio();
@@ -285,6 +289,7 @@ state UnTransform$
 		}
 		else
 		{
+			Report.SScreen( Report.Translate( "UnTransform$ OnEnterState$: Not valid or no state" ) );
 			// report.genericf("transform: untransform, but the target is not transformed!!!\n");
 			SetState Finish$;
 			return;
@@ -299,14 +304,17 @@ state InActive$
 
 	trigger OnTimer$(1)
 	{
+		Report.SScreen( Report.Translate( "InActive$ OnTimer$(1)" ) );
 		SetState( UnTransform$ );
 		return;
 	}
 
 	event OnEnterState$
 	{
+		Report.SScreen( Report.Translate( "InActive$ OnEnterState$" ) );
 		if (!infinite$)
 		{
+			Report.SScreen( Report.Translate( "InActive$ OnEnterState$: Setting timer" ) );
 			this.CreateTimer( 1, duration$ );
 		}
 	}
@@ -319,6 +327,7 @@ state Finish$
 {
 	event OnEnterState$
 	{
+		Report.SScreen( Report.Translate( "Finish$ OnEnterState$" ) );
 		// report.genericf("transform: we are finished\n");
 
 		SiegeFx.ClearVariables( owner.goid );

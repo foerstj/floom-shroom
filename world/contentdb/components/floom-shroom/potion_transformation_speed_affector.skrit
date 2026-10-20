@@ -34,6 +34,9 @@ float	originalMana$;
 
 float	previousVelocity$;
 
+float	remainingDuration$;
+float	timerStep$ = 60;
+
 #include "k_inc_spl_utils_DSX"
 
 startup state CastBegin$
@@ -305,7 +308,20 @@ state InActive$
 	trigger OnTimer$(1)
 	{
 		Report.SScreen( Report.Translate( "InActive$ OnTimer$(1)" ) );
-		SetState( UnTransform$ );
+		if (remainingDuration$ > timerStep$)
+		{
+			Report.SScreen( Report.Translate( "InActive$ OnTimer$(1): timer step" ) );
+			remainingDuration$ -= timerStep$;
+			target$.Go.Actor.SRemoveGenericState( owner.Go.Magic.StateName );
+			target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, remainingDuration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
+			this.CreateTimer( 1, remainingDuration$ > timerStep$ ? timerStep$ : remainingDuration$ );
+		}
+		else
+		{
+			Report.SScreen( Report.Translate( "InActive$ OnTimer$(1): timer finished" ) );
+			remainingDuration$ = 0;
+			SetState( UnTransform$ );
+		}
 		return;
 	}
 
@@ -315,7 +331,8 @@ state InActive$
 		if (!infinite$)
 		{
 			Report.SScreen( Report.Translate( "InActive$ OnEnterState$: Setting timer" ) );
-			this.CreateTimer( 1, duration$ );
+			remainingDuration$ = duration$;
+			this.CreateTimer( 1, remainingDuration$ > timerStep$ ? timerStep$ : remainingDuration$ );
 		}
 	}
 	transition -> UnTransform$: OnGoHandleCCMessage( WE_KILLED );

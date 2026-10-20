@@ -35,6 +35,7 @@ float	originalMana$;
 float	previousVelocity$;
 
 float	remainingDuration$;
+float	startTime$;
 float	timerStep$ = 60;
 
 #include "k_inc_spl_utils_DSX"
@@ -310,10 +311,11 @@ state InActive$
 		Report.SScreen( Report.Translate( "InActive$ OnTimer$(1)" ) );
 		if (remainingDuration$ > timerStep$)
 		{
-			Report.SScreen( Report.Translate( "InActive$ OnTimer$(1): timer step" ) );
-			remainingDuration$ -= timerStep$;
-			target$.Go.Actor.SRemoveGenericState( owner.Go.Magic.StateName );
-			target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, remainingDuration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
+			//remainingDuration$ -= timerStep$;
+			remainingDuration$ = duration$ - (WorldTime.Time - startTime$);
+			Report.SScreenF( "InActive$ OnTimer$(1): timer step - remaining: %f", remainingDuration$ );
+			//target$.Go.Actor.SRemoveGenericState( owner.Go.Magic.StateName );
+			//target$.Go.Actor.SAddGenericState( owner.Go.Magic.StateName, description$, remainingDuration$, caster$, owner.goid, owner.go.magic.GetMagicLevel( caster$.go ) );
 			this.CreateTimer( 1, remainingDuration$ > timerStep$ ? timerStep$ : remainingDuration$ );
 		}
 		else
@@ -331,6 +333,7 @@ state InActive$
 		if (!infinite$)
 		{
 			Report.SScreen( Report.Translate( "InActive$ OnEnterState$: Setting timer" ) );
+			startTime$ = WorldTime.Time;
 			remainingDuration$ = duration$;
 			this.CreateTimer( 1, remainingDuration$ > timerStep$ ? timerStep$ : remainingDuration$ );
 		}

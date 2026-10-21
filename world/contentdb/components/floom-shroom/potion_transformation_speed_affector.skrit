@@ -215,7 +215,7 @@ state UnTransform$
 	{
 		if( e$ == WE_REQ_DEACTIVATE )
 		{
-			Report.SScreen( "UnTransform$ WE_REQ_DEACTIVATE" );
+			//Report.SScreen( "UnTransform$ WE_REQ_DEACTIVATE" );
 			// no need to watch target any longer
 			GoDb.StopWatching( owner.Goid, target$);
 
@@ -243,7 +243,7 @@ state UnTransform$
 			[[
 			// untransform the caster
 			TransformationManager.SUnTransformMe(target$.Go);
-			Report.SScreen( "UnTransform$ WE_REQ_DEACTIVATE: We untransformed, right?" );
+			//Report.SScreen( "UnTransform$ WE_REQ_DEACTIVATE: We untransformed, right?" );
 
 			// un apply the slow down effects
 			target$.Go.Body.SetAvgMoveVelocity(previousVelocity$);
@@ -277,10 +277,10 @@ state UnTransform$
 
 	event OnEnterState$
 	{
-		Report.SScreen( "UnTransform$ OnEnterState$" );
+		//Report.SScreen( "UnTransform$ OnEnterState$" );
 		if( target$.IsValid && target$.Go.Actor.HasGenericState( owner.Go.Magic.StateName ) )
 		{
-			Report.SScreen( "UnTransform$ OnEnterState$: Trigger untransforming" );
+			//Report.SScreen( "UnTransform$ OnEnterState$: Trigger untransforming" );
 			// report.genericf("transform: actual UNtransforming occurring now\n");
 			// untransformed caster has the same life/mana ratio as when transformed
 			lifeRatio$ = target$.Go.Aspect.GetLifeRatio();
@@ -292,7 +292,7 @@ state UnTransform$
 		}
 		else
 		{
-			Report.SScreen( "UnTransform$ OnEnterState$: Not valid or no state" );
+			//Report.SScreen( "UnTransform$ OnEnterState$: Not valid or no state" );
 			// report.genericf("transform: untransform, but the target is not transformed!!!\n");
 			SetState Finish$;
 			return;
@@ -307,19 +307,19 @@ state InActive$
 
 	trigger OnTimer$(1)
 	{
-		Report.SScreen( "InActive$ OnTimer$(1)" );
+		//Report.SScreen( "InActive$ OnTimer$(1)" );
 		float remainingDuration$ = duration$ - (WorldTime.Time - startTime$);
 		if (remainingDuration$ > 0)
 		{
 			float halfRemainingDuration$ = remainingDuration$ / 2;
 			float nextTimerStep$ = halfRemainingDuration$ < minTimerStep$ ? minTimerStep$ : halfRemainingDuration$;
 			nextTimerStep$ = remainingDuration$ < nextTimerStep$ ? remainingDuration$ : nextTimerStep$;
-			Report.SScreenF( "InActive$ OnTimer$(1): timer step - remaining: %f - next timer step: %f", remainingDuration$, nextTimerStep$ );
+			//Report.SScreenF( "InActive$ OnTimer$(1): timer step - remaining: %f - next timer step: %f", remainingDuration$, nextTimerStep$ );
 			this.CreateTimer( 1, nextTimerStep$ );
 		}
 		else
 		{
-			Report.SScreen( "InActive$ OnTimer$(1): timer finished" );
+			//Report.SScreen( "InActive$ OnTimer$(1): timer finished" );
 			SetState( UnTransform$ );
 		}
 		return;
@@ -327,10 +327,10 @@ state InActive$
 
 	event OnEnterState$
 	{
-		Report.SScreen( "InActive$ OnEnterState$" );
+		//Report.SScreen( "InActive$ OnEnterState$" );
 		if (!infinite$)
 		{
-			Report.SScreen( "InActive$ OnEnterState$: Setting timer" );
+			//Report.SScreen( "InActive$ OnEnterState$: Setting timer" );
 			startTime$ = WorldTime.Time;
 			this.CreateTimer( 1, 0.0 );
 		}
@@ -344,7 +344,7 @@ state Finish$
 {
 	event OnEnterState$
 	{
-		Report.SScreen( "Finish$ OnEnterState$" );
+		//Report.SScreen( "Finish$ OnEnterState$" );
 		// report.genericf("transform: we are finished\n");
 
 		SiegeFx.ClearVariables( owner.goid );

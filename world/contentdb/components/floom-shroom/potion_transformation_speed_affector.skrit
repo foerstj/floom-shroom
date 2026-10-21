@@ -35,7 +35,7 @@ float	originalMana$;
 float	previousVelocity$;
 
 float	startTime$;
-float	timerStep$ = 60;
+float	minTimerStep$ = 10;
 
 #include "k_inc_spl_utils_DSX"
 
@@ -311,8 +311,11 @@ state InActive$
 		float remainingDuration$ = duration$ - (WorldTime.Time - startTime$);
 		if (remainingDuration$ > 0)
 		{
-			Report.SScreenF( "InActive$ OnTimer$(1): timer step - remaining: %f", remainingDuration$ );
-			this.CreateTimer( 1, remainingDuration$ > timerStep$ ? timerStep$ : remainingDuration$ );
+			float halfRemainingDuration$ = remainingDuration$ / 2;
+			float nextTimerStep$ = halfRemainingDuration$ < minTimerStep$ ? minTimerStep$ : halfRemainingDuration$;
+			nextTimerStep$ = remainingDuration$ < nextTimerStep$ ? remainingDuration$ : nextTimerStep$;
+			Report.SScreenF( "InActive$ OnTimer$(1): timer step - remaining: %f - next timer step: %f", remainingDuration$, nextTimerStep$ );
+			this.CreateTimer( 1, nextTimerStep$ );
 		}
 		else
 		{
@@ -329,7 +332,7 @@ state InActive$
 		{
 			Report.SScreen( "InActive$ OnEnterState$: Setting timer" );
 			startTime$ = WorldTime.Time;
-			this.CreateTimer( 1, duration$ > timerStep$ ? timerStep$ : duration$ );
+			this.CreateTimer( 1, 0.0 );
 		}
 	}
 	transition -> UnTransform$: OnGoHandleCCMessage( WE_KILLED );

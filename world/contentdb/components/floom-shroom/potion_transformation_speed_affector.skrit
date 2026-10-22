@@ -305,6 +305,16 @@ state InActive$
 	/////////////////////////////
 	// Omni Go
 
+	/*
+	 * Note: turns out Skrit timers are not reliable - there's a certain time drift happening,
+	 * which seems to get worse with the timer duration but also with the overall lifetime of the Omni Go.
+	 * The GenericState countdown is reliable tho. And that leads to a bug:
+	 * When the GenericState is removed due to its countdown expiring, and the Skrit timer only fires afterwards,
+	 * the HasGenericState check in UnTransform$ fails and the character isn't untransformed, staying stuck in the transformed state.
+	 * The fix: instead of starting one big Skrit timer, I restart it in smaller steps,
+	 * checking the actually elapsed time with WorldTime.Time which is reliable as well.
+	 */
+
 	trigger OnTimer$(1)
 	{
 		//Report.SScreen( "InActive$ OnTimer$(1)" );
